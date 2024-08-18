@@ -1,4 +1,5 @@
 import requests
+import time
 from src.job_scraper import JobScraper
 from bs4 import BeautifulSoup
 
@@ -13,7 +14,10 @@ class BrightNetworkScraper(JobScraper):
             # page doesnt exist
             return
         soup = BeautifulSoup(page.content, "html.parser")
-        html_job_titles = soup.find_all(class_ = "tw-font-bold tw-mr-4")
+
+        time.sleep(5)
+
+        html_job_titles = soup.find_all('h6')
         html_job_links = soup.find_all(class_ = "result-link result-link-text js-ga-search-event card-link", href=True)
         return self.parse_content(html_job_titles, html_job_links)
 
@@ -47,7 +51,7 @@ class BrightNetworkScraper(JobScraper):
             dict: dictionary has the following key:
               - 'job title' (str): job title
             and the following value:
-              - 'job linl' (str): url link corresponding to the job
+              - 'job link' (str): url link corresponding to the job
         """
         title_link_pairs = {}
         i = 0
