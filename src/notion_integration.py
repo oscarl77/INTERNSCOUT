@@ -13,6 +13,14 @@ class Integration:
         }
 
     def _update_notion_page(self, internship_title, internship_url, submission_status):
+        """Sends internship data to a Notion page to be stored in a table.
+
+        Args:
+            internship_title (str): Title of the internship post
+            internship_url (str): url link to the internship post
+            submission_status (str): Status on whether the application 
+            for the internship has been completed.
+        """
         API_URL = "https://api.notion.com/v1/pages"
         
         data = {
